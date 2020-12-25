@@ -24,3 +24,6 @@ export class Node {
     return array
   }
 }
+
+//O(v + e) verticies + edges 
+//Has to seach every node and loop through the children which are edges
