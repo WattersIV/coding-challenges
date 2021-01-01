@@ -3,37 +3,41 @@
 //return pair from array 1 then 2 in an array 
 
 export function smallestDifference(arrayOne: number[], arrayTwo: number[]) {
-  //Sort 2nd array O(n^2)
+  //Sort both arrays O(n^2)
+  arrayOne.sort((a, b) => a - b)
   arrayTwo.sort((a, b) => a - b)
-  //Loop through 1st array and keep track of absoulte diff
-  let closest; 
-  let closestPair;
-  
-  //O(n^2)
-  for (const firstValue of arrayOne) {
-    for (let i = 0; i < arrayTwo.length; i++) {
-      //Absoulte difference 
-      const diff = Math.abs(firstValue - arrayTwo[i])
-      let closestInIteration;
-      //if same number return them
-      if (diff === 0) {
-        return [firstValue, arrayTwo[i]]
-      }
 
-      //Checking if the value is getting closer to 0 within the current iteration
-      if (!closestInIteration || closestInIteration > diff) {
-        closestInIteration = diff
+  //create comparision vars 
+  let closestPair: number[] = []
+  let smallestDiff = Infinity
 
-        //Checking if the value is the closest to 0 in all iterations
-        if (!closest || closest > diff) {
-          closestPair = [firstValue, arrayTwo[i]]
-          closest = diff
-        } 
-      } else {
-        //If value is not getting closer break loop
-        break
-      }  
+  //Pointers 
+  let pointerOne = 0
+  let pointerTwo = 0
+
+  while (pointerOne < arrayOne.length && pointerTwo < arrayTwo.length) {
+    //Calc absoulte diff
+    const diff = Math.abs(arrayOne[pointerOne] - arrayTwo[pointerTwo])
+
+    //If nums are the same return them 
+    if (diff === 0) {
+      return [arrayOne[pointerOne], arrayTwo[pointerTwo]]
     }
-  } 
+
+    //if current dif is lowest save it for compairson and save the pair
+    if (diff < smallestDiff) {
+      smallestDiff = diff
+      closestPair = [arrayOne[pointerOne], arrayTwo[pointerTwo]]
+    }
+    //if one number bigger than the other increment the other to make it larger
+    if (arrayOne[pointerOne] < arrayTwo[pointerTwo]) {
+      pointerOne++
+    } else {
+      pointerTwo++
+    }
+  }
+
   return closestPair;
 }
+
+//Outside of the sorting it is O(nlog(n) + mlog(m))
