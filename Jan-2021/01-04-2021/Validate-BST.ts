@@ -10,7 +10,7 @@ class BST {
     this.right = null;
   }
 }
-//O(n) Time O(depth) time
+//O(n) Time O(depth) space
 export function validateBst(tree: BST) {
   //compare the current value witht the min and max value it can have 
 	//If it is between the limit and a BST or null then keep searchings DFS 
