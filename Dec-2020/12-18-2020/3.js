@@ -29,7 +29,6 @@ function climbingLeaderboard(scores, alice) {
         //nothing
       } else {
         rank++
-        console.log(rank)
         if (scores.length - 1 === i) {
           rank++ 
           output.push(rank)
